@@ -1,0 +1,160 @@
+<div ng-controller="particularUserDetailsCtrl" align="center">
+
+<!-- addAmount Confirmation -->
+
+    <div id="addAmountModal" class="modal fade bs-example-modal-lg" role='dialog'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <center><h4 class="modal-title">Confirmation</h4></center>
+                        </div>
+                        <div class="modal-body">
+                            <table>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td>{{particularUserDetails.userName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment:</td>
+                                    <td>{{userCredit | number:0}}</td>
+                                </tr>
+                            </table>
+                           <center><p>Do you want to submit the payment?</p></center>
+                        </div>
+                        <div class="modal-footer">
+                            <button ng-click="finalSubmission()" id="homeCss">Submit</button>
+                            <button ng-click="cancelPay()" id="logout">Cancel</button>
+                            </center>
+                        </div>
+                    </div>
+                  </div>
+    </div>
+
+<!-- deletePrinciple Confirmation -->
+
+<div id="deleteAmount" class="modal fade bs-example-modal-lg" role='dialog'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <center><h4 class="modal-title">Confirmation</h4></center>
+            </div>
+            <div class="modal-body">
+               <center><p>Do you really want to delete the payment?</p></center>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="finalDelete()" id="homeCss">Submit</button>
+                <button ng-click="cancelDelete()" id="logout">Cancel</button>
+                </center>
+            </div>
+        </div>
+      </div>
+</div>
+<table align="right">
+        <tr>
+            <td ng-click="goHome()" id="homeCss">Home</td>
+            <td></td>
+            <td ng-click="logOut()" id="logout">Log Out</td>
+        </tr>
+    </table><br><br>
+                <table id="ParticularUserDetailsTable" style="width: 30%;" >
+                    <tr>
+                        <th colspan="2">
+                            User Details
+                        </th>
+                     </tr>
+                    <tr> <td>Name: </td> <td>{{particularUserDetails.userName}}</td> </tr>
+                    <tr> <td>Phone:</td> <td>{{particularUserDetails.userPhone}}</td> </tr>
+                    <tr> <td>Location:</td> <td>{{particularUserDetails.userLocation}}</td> </tr>
+                    <tr> <td>Address:</td> <td>{{particularUserDetails.userAddress}}</td> </tr>
+                </table><br>
+            <div>
+                <b>Payment Details</b>
+                <table id="ParticularUserDetailsTable" style="width: 90%">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Principle</th>
+                        <th>Rate</th>
+                        <th>Time</th>
+                        <th>Interest</th>
+                        <th>Credeted</th>
+                        <th>Debit</th>
+                        <th>Add Payment</th>
+                        <th>History</th>
+                        <th>Delete</th>
+                        <th>Comments</th>
+                    </tr>
+                    <tr ng-repeat="details in particularUserDetails.userMoneyDetails">
+                        <td>{{$index+1}}</td>
+                        <td>{{details.initialMoney | number:0}}</td>
+                        <td>{{details.interestRate}}</td>
+                        <td>{{details.timeOfGiven}}</td>
+                        <td>{{details.totalInterest | number:0}}</td>
+                        <td>{{details.userCredit | number:0}}</td>
+                        <td>{{details.userDebt | number:0}}</td>
+                        <td ng-click="addPayment($index)" id="particularUserAddAmount">Add Pay</td>
+                        <td ng-click="moreHistory($index)" id="particularUserDetails">More..</td>
+                        <td ng-click="deleteAmount($index)" id="particularUserDelete">Delete</td>
+                        <td  id="overFlowHidden">{{details.comments}}</td>
+                    </tr>
+                </table>
+            </div><br>
+            <div ng-show="ngHistory">
+                <b>Payment History</b>
+                <table  id="ParticularUserDetailsTable" style="width: 50%">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Time at Payment</th>
+                        <th>Paid</th>   
+                        <th>Comments</th>
+                    </tr>
+                    <tr ng-repeat="details in historyDetails.individualPayments">
+                        <td>{{$index+1}}</td>
+                        <td>{{details.timeNow}}</td>
+                        <td>{{details.paymentMoney | number:0}}</td>
+                        <td>{{details.comments}}</td>
+                    </tr>
+                </table>
+            </div><br>
+            <div ng-show="ngPayment">
+                <b>Payment Form</b>
+                <table  id="ParticularUserDetailsTable" style="width: 30%">
+                    <tr>
+                        <th colspan="2">
+                            Payment Details
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>Principle Amount:</td>
+                        <td>{{paymentUserDetails.initialMoney | number:0}}</td>
+                    </tr>
+                    <tr>
+                        <td>Time at given:</td>
+                        <td>{{paymentUserDetails.timeOfGiven}}</td>
+                    </tr>
+                    <tr>
+                        <td>Money to be paid:</td>
+                        <td>{{paymentUserDetails.userDebt | number:0}}</td>
+                    </tr>        
+                    <tr>
+                        <td>Paying Amount:</td>
+                        <td>
+                            <input type="Number" ng-model="userCredit" placeholder="Amount to pay"/>
+                        </td>
+                    </tr>        
+                    <tr>
+                        <td>Comments:</td>
+                        <td>
+                            <input type="text" ng-model="indComments" placeholder="Comment here"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button ng-click="confirmPay()" ng-disabled="paymentDisabled" id="homeCss">Pay</button>
+                            <button ng-click="cancelPay()" id="logout">Cancel</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+</div>

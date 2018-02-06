@@ -1,0 +1,81 @@
+<div ng-controller="principlePaymentCtrl" align="center">
+ <!-- addAmount Confirmation -->
+
+    <div id="principleAmountModal" class="modal fade bs-example-modal-lg" role='dialog'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <center><h4 class="modal-title">Confirmation</h4></center>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <tr>
+                                <td>Name:</td>
+                                <td>{{principlePaymentDetails.userName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>{{principlePaymentDetails.userPhone}}</td>
+                            </tr>
+                            <tr>
+                                <td>Amount:</td>
+                                <td>{{principleAmount | number:0}}</td>
+                            </tr>
+                            <tr>
+                                <td>Interest:</td>
+                                <td>{{interestRate}}</td>
+                            </tr>
+                        </table>
+                    <center><p>Do you want to submit the payment?</p></center>
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-click="finalPayment()" id="homeCss">Submit</button>
+                        <button ng-click="finalCancel()" id="logout">Cancel</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <table align="right">
+                <tr>
+                    <td ng-click="goHome()" id="homeCss">Home</td>
+                    <td></td>
+                    <td ng-click="logOut()" id="logout">Log Out</td>
+                </tr>
+            </table><br><br>
+     
+    <table id="ParticularUserDetailsTable">
+        <tr>
+            <th colspan="2">
+                Payment Details
+            </th>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>{{principlePaymentDetails.userName}}</td>
+        </tr>
+        <tr>
+            <td>Phone No:</td>
+            <td>{{principlePaymentDetails.userPhone}}</td>
+        </tr>        
+        <tr>
+            <td>Principle Amount:</td>
+            <td><input type="Number" ng-model="principleAmount" placeholder="Enter principle amount"/></td>
+        </tr>
+        <tr>
+            <td>Interest:</td>
+            <td><input type="Number" ng-model="interestRate" placeholder="Enter interest rate"/></td>
+        </tr>
+        <tr>
+            <td>Comments:</td>
+            <td><textarea style="height:130px;width:300px;" ng-model="comments" placeholder="Enter your comments"/></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button ng-click="paymentSubmit()" id="addUserButton">Submit</button>
+                <button ng-click="cancelSubmit()" id="cancelButton">Cancel</button>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,59 @@
+<div ng-controller="addUserCtrl" align="center">
+ <!-- addAmount Confirmation -->
+
+    <div id="userSubmitModal" class="modal fade bs-example-modal-lg" role='dialog'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <center><h4 class="modal-title">Confirmation</h4></center>
+                    </div>
+                    <div class="modal-body">
+                        <table>
+                            <tr>
+                                <td>Name:</td>
+                                <td>{{userName}}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>{{userPhone}}</td>
+                            </tr>
+                            <tr>
+                                <td>Amount:</td>
+                                <td>{{userLocation}}</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td>{{userAddress}}</td>
+                            </tr>
+                        </table>
+                    <center><p>Do you want to submit the payment?</p></center>
+                    </div>
+                    <div class="modal-footer">
+                        <button ng-click="finalSubmit()" id="homeCss">Submit</button>
+                        <button ng-click="finalCancel()" id="logout">Cancel</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+    </div>
+            <table align="right">
+                <tr>
+                    <td ng-click="goHome()" id="homeCss">Home</td>
+                    <td></td>
+                    <td ng-click="logOut()" id="logout">Log Out</td>
+                </tr>
+            </table><br><br>
+    <div id="addUserName">
+        <p align="left">User Name</p>
+        <input type="text" ng-model="userName" placeholder="User Name"/>
+        <p align="left">Phone No</p>
+        <input type="text" ng-model="userPhone" placeholder="Phone No"/>
+        <p align="left">Location</p>
+        <input type="text" ng-model="userLocation" placeholder="User Location"/>
+        <p align="left">Address</p>
+        <input type="text" ng-model="userAddress" placeholder="User Address"/>
+        <button ng-click="addUser()" id="addUserButton">Add</button>
+        <button ng-click="cancelUser()" id="cancelButton">Cancel</button>
+    </div>
+</div>
